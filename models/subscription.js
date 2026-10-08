@@ -1,0 +1,32 @@
+const mongoose=require("mongoose");
+const subscriptionSchema=new mongoose.Schema({
+    service:{
+        type:String,
+        required:true,
+        trime:true
+    },
+    monthlyCost:{
+        type:Number,
+        required:true,
+        min:0,
+        max:5000
+    },
+    category:{
+        type:String,
+        enum:{
+            values:["ott","music","apps","other"]
+        },
+        default:"other"
+    },
+    active:{
+        type:Boolean,
+        default:true
+    },
+    renewalDate:{
+        type:Date,
+        required:true
+    }
+},{
+    timestamp:true
+});
+module.exports=mongoose.model("Subscription",subscriptionSchema);
